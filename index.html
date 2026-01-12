@@ -1,0 +1,368 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
+  <title>2026.6 Italy</title>
+  <meta name="color-scheme" content="light dark" />
+  <style>
+    :root{
+      --bg0: #ebeef2; 
+      --bg1: #ffffff;
+      --bg2: #f4f6f9;
+      --stroke: #cfd4db; 
+      --text: #202124; 
+      --muted: #5f6368;
+      --muted2: #80868b;
+      --accent: #6c7a9c; 
+      --accent2: #8da387; 
+      --soft-purple: #8e7cc3; 
+      --price-tag: #c08080;
+      --shadow: 0 4px 12px rgba(0,0,0,0.08);
+      --max: 600px; /* 針對手機優化寬度 */
+      --sans: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans TC", sans-serif;
+    }
+
+    html[data-theme="dark"] {
+      --bg0: #121416;
+      --bg1: #1e2022;
+      --bg2: #282a2d;
+      --stroke: #3c4043;
+      --text: #e8eaed;
+      --muted: #bdc1c6;
+      --muted2: #9aa0a6;
+      --accent: #a5adbd;
+      --accent2: #b8c7b3;
+    }
+
+    *{ box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+    body{ margin:0; font-family: var(--sans); color: var(--text); background: var(--bg0); line-height: 1.5; transition: 0.2s; overflow-x: hidden; }
+    .wrap{ max-width: var(--max); margin: 0 auto; padding: 12px 12px 100px; }
+
+    /* Top bar 針對手機縮減高度 */
+    .topbar{ position: sticky; top: 0; z-index: 30; background: var(--bg0); border-bottom: 1px solid var(--stroke); padding-bottom: 4px; backdrop-filter: blur(10px); }
+    .header-content { max-width: var(--max); margin: 0 auto; padding: 10px 16px 2px; display:flex; justify-content:space-between; align-items:center; }
+    .hero h1 { margin:0; font-size: 18px; font-weight: 700; color: var(--accent); }
+
+    /* 天數選單手機滑動優化 */
+    .menu-container { width: 100%; overflow-x: auto; padding: 8px 12px; scrollbar-width: none; }
+    .menu-container::-webkit-scrollbar { display: none; }
+    .menu { display: flex; gap: 8px; min-width: max-content; }
+    .menu-item {
+        display: flex; flex-direction: column; align-items: center; justify-content: center;
+        min-width: 60px; height: 60px; border-radius: 12px; border: 1px solid var(--stroke);
+        background: var(--bg1); cursor: pointer; color: var(--muted); transition: all 0.2s;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.03);
+    }
+    .menu-item.active { background: var(--accent); color: #fff; border-color: var(--accent); box-shadow: 0 4px 8px rgba(0,0,0,0.15); }
+
+    .card{
+      background: var(--bg1); border: 1px solid var(--stroke); border-radius: 20px;
+      padding: 20px; margin-top: 12px; box-shadow: var(--shadow);
+    }
+    .date-badge { font-size: 12px; color: var(--accent); font-weight: 700; margin-bottom: 4px; display: block; }
+    
+    .schedule-box {
+        background: var(--bg2);
+        border-left: 4px solid var(--soft-purple);
+        padding: 15px; margin: 15px 0; border-radius: 4px 12px 12px 4px;
+        border: 1px solid var(--stroke); border-left-width: 4px;
+    }
+    .schedule-time { color: var(--soft-purple); font-weight: 800; font-size: 1.1em; letter-spacing: 0.3px; display: block; margin-bottom: 4px; }
+
+    .attractions-list { display: grid; grid-template-columns: 1fr; gap: 12px; margin: 12px 0; }
+    .attr-item {
+        background: var(--bg1); padding: 16px; border-radius: 16px; border: 1px solid var(--stroke);
+        display: flex; flex-direction: column; gap: 10px;
+    }
+    .attr-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 4px; }
+    .attr-name { font-weight: 700; font-size: 15px; color: var(--text); flex: 1; }
+    .attr-stay { font-size: 11px; color: var(--accent); background: var(--bg2); padding: 2px 8px; border-radius: 6px; font-weight: 600; border: 1px solid var(--stroke); white-space: nowrap; }
+    
+    .info-row { display: grid; grid-template-columns: 1fr; gap: 4px; font-size: 12px; color: var(--muted); }
+    .info-pill { display: flex; align-items: center; gap: 6px; }
+    .price { color: var(--price-tag); font-weight: 700; }
+
+    .nav-link {
+        display: flex; align-items: center; justify-content: center; gap: 8px;
+        font-size: 13px; color: var(--text); text-decoration: none;
+        padding: 12px; border: 1px solid var(--stroke); border-radius: 12px;
+        background: var(--bg2); font-weight: 600; transition: 0.2s;
+        margin-top: 4px;
+    }
+    .nav-link:active { background: var(--accent); color: white; border-color: var(--accent); }
+
+    .link-btn {
+        display: flex; align-items: center; justify-content: center; gap: 8px;
+        padding: 12px; border-radius: 12px;
+        background: var(--accent); color: #fff; font-size: 14px; font-weight: 600;
+        text-decoration: none; margin-top: 8px;
+    }
+
+    .btn { cursor: pointer; border: 1px solid var(--stroke); background: var(--bg1); color: var(--text); padding: 6px 12px; border-radius: 8px; font-size: 12px; font-weight: 600; }
+    
+    .note-text { font-size: 13px; color: var(--muted); border-top: 1px dashed var(--stroke); padding-top: 12px; margin-top: 20px; line-height: 1.6; }
+    .note-tag { background: var(--accent2); color: white; padding: 1px 6px; border-radius: 4px; font-size: 10px; margin-right: 4px; vertical-align: middle; }
+  </style>
+</head>
+<body>
+
+  <div class="topbar">
+    <div class="header-content">
+      <div class="hero"><h1>2026.6 Italy</h1></div>
+      <button onclick="toggleTheme()" class="btn">🌓 主題</button>
+    </div>
+    <div class="menu-container"><div class="menu" id="dayMenu"></div></div>
+  </div>
+
+  <div class="wrap"><div id="content"></div></div>
+
+  <script>
+    const itinerary = [
+      {
+        day: 1, date: "2026/06/13 (六)",
+        city: "米蘭 (Milan)",
+        flight: "BR 95 (EVA) | 07:35 抵達 MXP",
+        transport: "機場快線 Malpensa Express",
+        schedule: "09:13 MXP T1 ➜ 10:07 Milano Centrale",
+        booking: "https://www.malpensaexpress.it/en/",
+        highlights: [
+            {n: "米蘭大教堂 Duomo di Milano", s: "2.5-3小時", p: "€7-20 (視登頂方式)", t: "09:00-19:00", r: "建議預約"},
+            {n: "艾曼紐二世拱廊 Galleria Vittorio Emanuele II", s: "1小時", p: "免費", t: "24小時", r: "無需預約"},
+            {n: "星巴克臻選烘焙工坊 Starbucks Reserve Roastery", s: "1小時", p: "免費參觀", t: "07:30-22:00", r: "無需預約", customLink: "https://maps.app.goo.gl/LoonkhWiVqUVob2KA"}
+        ],
+        note: "09:13 是最符合九點左右出發的班次。抵達中央車站後，建議先將行李寄存在飯店，再前往大教堂。"
+      },
+      {
+        day: 2, date: "2026/06/14 (日)",
+        city: "威尼斯主島 (Venice Main Island)",
+        transport: "Trenitalia / Italo 高鐵 + 區域火車",
+        schedule: "08:45 Milano ➜ 10:57 Mestre | 飯店置物 | 12:10 Mestre ➜ S. Lucia",
+        booking: "https://www.trenitalia.com/en.html",
+        highlights: [
+            {n: "赤足橋 Ponte degli Scalzi", s: "20分鐘", p: "免費", t: "24小時", r: "第一站：出車站即達，拍大運河絕佳位"},
+            {n: "沈船書店 Libreria Acqua Alta", s: "45分鐘", p: "免費", t: "09:00-19:00", r: "第二站：步行深入小巷，網美必拍書牆"},
+            {n: "里阿爾托橋 Ponte di Rialto", s: "45分鐘", p: "免費", t: "24小時", r: "第三站：威尼斯最著名石橋，兩側多商店"},
+            {n: "聖馬可大教堂 & 廣場 Basilica di San Marco", s: "1.5小時", p: "廣場免費/教堂€6", t: "09:30-17:15", r: "第四站：需預約，威尼斯的心臟"},
+            {n: "嘆息橋 Ponte dei Sospiri", s: "15分鐘", p: "外部拍照免費", t: "24小時", r: "第五站：從麥桿橋方向拍攝最順"}
+        ],
+        note: "在 Venezia Mestre 下車後先回飯店放行李（預留 1 小時），再搭乘頻繁的區域列車前往主島 S. Lucia 車站開始行程。"
+      },
+      {
+        day: 3, date: "2026/06/15 (一)",
+        city: "威尼斯外島 (Venice Islands)",
+        transport: "Trenitalia + ACTV 水上巴士",
+        schedule: "08:50 Venezia Mestre ➜ 09:02 Venezia S. Lucia (轉乘 Line 12)",
+        booking: "https://actv.avmspa.it/en",
+        highlights: [
+            {n: "布拉諾島 (彩色島) Burano", s: "3-4小時", p: "免費", t: "24小時", r: "建議早上出發光線最佳"},
+            {n: "總督宮 Palazzo Ducale", s: "2小時", p: "€30 (含各博物館)", t: "09:00-19:00", r: "建議預約"},
+            {n: "學院橋 Ponte dell'Accademia", s: "30分鐘", p: "免費", t: "24小時", r: "拍攝安康聖母院經典角度"}
+        ],
+        note: "從 Venezia Mestre 出發，先搭乘區間車跨海至本島車站，再步行前往 Fondamente Nove 碼頭搭乘 Line 12。"
+      },
+      {
+        day: 4, date: "2026/06/16 (二)",
+        city: "多洛米蒂 (Dolomites)",
+        transport: "火車 + SAD 巴士",
+        schedule: "08:50 Venezia Mestre ➜ 11:24 Bolzano | 11:42 Bus 350",
+        booking: "https://www.sii.bz.it/en",
+        highlights: [
+            {n: "St. Ulrich (Ortisei) 小鎮漫步", s: "2小時", p: "免費", t: "—", r: "無需預約"},
+            {n: "休斯山 Alpe di Siusi (纜車)", s: "3小時", p: "約€28 (來回)", t: "08:30-18:00", r: "無需預約"}
+        ],
+        note: "入住山區飯店通常會提供免費的交通卡 (Mobilcard)。"
+      },
+      {
+        day: 5, date: "2026/06/17 (三)",
+        city: "多洛米蒂 (Dolomites)",
+        transport: "Seceda 纜車",
+        schedule: "08:30 纜車站開門即出發",
+        booking: "https://www.seceda.it/en/",
+        highlights: [
+            {n: "Seceda 刀鋒山纜車", s: "4-5小時", p: "約€39.5 (來回)", t: "08:30-17:30", r: "無需預約"},
+            {n: "Pieralongia 步道", s: "1.5小時", p: "免費", t: "—", r: "山區路段"}
+        ],
+        note: "早起上山可避開午後雲層，纜車站附近有免費寄物櫃 (視季節)。"
+      },
+      {
+        day: 6, date: "2026/06/18 (四)",
+        city: "多洛米蒂 (Dolomites)",
+        transport: "SAD Bus 巴士",
+        schedule: "08:40 出發前往 Misurina 方向",
+        booking: "https://www.sii.bz.it/en",
+        highlights: [
+            {n: "三尖峰 Tre Cime di Lavaredo", s: "5-6小時", p: "免門票 (巴士費另計)", t: "—", r: "戶外健行"},
+            {n: "密蘇里納湖 Lago di Misurina", s: "1小時", p: "免費", t: "24小時", r: "無需預約"}
+        ],
+        note: "前往三尖峰的接駁巴士人潮眾多，務必提早排隊。"
+      },
+      {
+        day: 7, date: "2026/06/19 (五)",
+        city: "佛羅倫斯 (Florence)",
+        transport: "高鐵 Frecciarossa",
+        schedule: "09:16 Bolzano ➜ 12:35 Firenze S.M.N",
+        booking: "https://www.trenitalia.com/en.html",
+        highlights: [
+            {n: "聖母百花大教堂 Cattedrale", s: "1.5小時", p: "教堂免費/圓頂需票", t: "10:15-15:45", r: "登頂需極早預約"},
+            {n: "佛羅倫斯中央市場 Mercato Centrale", s: "1.5小時", p: "免費進入", t: "08:00-00:00", r: "無需預約"}
+        ],
+        note: "百花大教堂登頂門票非常搶手，建議提前一個月購買套票。"
+      },
+      {
+        day: 8, date: "2026/06/20 (六)",
+        city: "佛羅倫斯 (Florence)",
+        transport: "步行",
+        schedule: "08:45 烏菲茲美術館預約入場",
+        booking: "https://www.uffizi.it/en",
+        highlights: [
+            {n: "烏菲茲美術館 Galleria degli Uffizi", s: "4小時", p: "約€25", t: "08:15-18:30", r: "強烈建議預約"},
+            {n: "維奇歐橋 (老橋) Ponte Vecchio", s: "45分鐘", p: "免費", t: "24小時", r: "無需預約"},
+            {n: "米開朗基羅廣場 Piazzale Michelangelo", s: "1.5小時", p: "免費", t: "24小時", r: "無需預約"}
+        ],
+        note: "今日行程較緊湊，傍晚可買杯飲料在米開朗基羅廣場看夕陽。"
+      },
+      {
+        day: 9, date: "2026/06/21 (日)",
+        city: "佛羅倫斯 (Florence)",
+        transport: "步行 / 公車",
+        schedule: "09:00 學院美術館入場",
+        booking: "https://www.galleriaaccademiafirenze.it/en/",
+        highlights: [
+            {n: "學院美術館 (大衛像)", s: "2小時", p: "約€16", t: "08:15-18:50", r: "建議預約"},
+            {n: "新聖母大殿藥妝店 Santa Maria Novella", s: "1小時", p: "免費參觀", t: "09:30-20:00", r: "無需預約", customLink: "https://maps.app.goo.gl/UWH5EZejUwBpNFzT6?g_st=ic"}
+        ],
+        note: "週日有些小店可能不開，但大型藥妝店與美術館均有營業。"
+      },
+      {
+        day: 10, date: "2026/06/22 (一)",
+        city: "托斯卡尼 (Tuscany)",
+        transport: "區域火車 + 巴士",
+        schedule: "08:50 Firenze SMN ➜ 10:05 Siena",
+        booking: "https://www.trenitalia.com/en.html",
+        highlights: [
+            {n: "錫耶納田野廣場 Piazza del Campo", s: "2小時", p: "免費", t: "24小時", r: "無需預約"},
+            {n: "錫耶納大教堂 Duomo di Siena", s: "1.5小時", p: "€8-15", t: "10:30-18:00", r: "現場購票即可"}
+        ],
+        note: "錫耶納是中古世紀山城，有很多階梯建議穿好穿的鞋。"
+      },
+      {
+        day: 11, date: "2026/06/23 (二)",
+        city: "羅馬 (Rome)",
+        transport: "高鐵 (經比薩)",
+        schedule: "08:28 Firenze ➜ 09:28 Pisa | 11:30 Pisa ➜ 14:15 Roma",
+        booking: "https://www.trenitalia.com/en.html",
+        highlights: [
+            {n: "比薩斜塔 Leaning Tower", s: "1.5小時", p: "外觀免費/登塔€20", t: "09:00-20:00", r: "登塔需預約"},
+            {n: "特雷維噴泉 (許願池)", s: "45分鐘", p: "免費", t: "24小時", r: "無需預約"}
+        ],
+        note: "在比薩車站寄放行李後即可輕裝前往斜塔區域拍照。"
+      },
+      {
+        day: 12, date: "2026/06/24 (三)",
+        city: "羅馬 (Rome)",
+        transport: "地鐵 / 步行",
+        schedule: "08:30 羅馬競技場預約入場",
+        booking: "https://www.coopculture.it/en/",
+        highlights: [
+            {n: "羅馬競技場 Colosseum", s: "3小時", p: "€18 (套票)", t: "09:00-19:15", r: "強烈建議預約"},
+            {n: "萬神殿 Pantheon", s: "1小時", p: "€5", t: "09:00-19:00", r: "週末需預約"}
+        ],
+        note: "羅馬景點安檢非常耗時，建議提早 20-30 分鐘到達。"
+      },
+      {
+        day: 13, date: "2026/06/25 (四)",
+        city: "米蘭 (Milan)",
+        transport: "高鐵 Frecciarossa / Italo",
+        schedule: "15:10 Roma Termini ➜ 18:05 Milano Centrale",
+        booking: "https://www.trenitalia.com/en.html",
+        highlights: [
+            {n: "梵蒂岡博物館 Musei Vaticani", s: "4小時", p: "€20 (預約費另計)", t: "08:00-19:00", r: "強烈建議預約"},
+            {n: "聖彼得大教堂 St. Peter's Basilica", s: "1.5小時", p: "教堂免費", t: "07:00-19:00", r: "免門票但排隊長"}
+        ],
+        note: "上午預留充足時間遊覽梵蒂岡。下午搭乘三點左右的高鐵返回米蘭。這是旅程最後一晚，入住米蘭中央車站附近以便隔日早起搭機。"
+      }
+    ];
+
+    let currentDay = 1;
+
+    function renderMenu() {
+        const menu = document.getElementById('dayMenu');
+        menu.innerHTML = itinerary.map(item => `
+            <div class="menu-item ${item.day === currentDay ? 'active' : ''}" onclick="setDay(${item.day})">
+                <div style="font-size:10px; font-weight:700; opacity:0.8;">DAY</div>
+                <div style="font-weight:800;font-size:18px">${item.day}</div>
+            </div>
+        `).join('');
+    }
+
+    function setDay(d) {
+        currentDay = d;
+        renderMenu();
+        renderContent();
+        // 自動捲動到選中的天數，確保在手機上可見
+        const activeItem = document.querySelector('.menu-item.active');
+        if (activeItem) {
+            activeItem.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+        }
+    }
+
+    function renderContent() {
+        const item = itinerary.find(i => i.day === currentDay);
+        const container = document.getElementById('content');
+        
+        const highlightsHtml = item.highlights.map(h => {
+            const mapUrl = h.customLink || `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(h.n)}`;
+            return `
+                <div class="attr-item">
+                    <div class="attr-header">
+                        <span class="attr-name">${h.n}</span>
+                        <span class="attr-stay">⏳ ${h.s}</span>
+                    </div>
+                    <div class="info-row">
+                        <div class="info-pill">🏷️ 成人門票: <span class="price">${h.p}</span></div>
+                        <div class="info-pill">⏰ 營業: <span>${h.t}</span></div>
+                        <div class="info-pill">📅 狀態: <span>${h.r}</span></div>
+                    </div>
+                    <a href="${mapUrl}" target="_blank" class="nav-link">📍 在地圖開啟導航</a>
+                </div>
+            `;
+        }).join('');
+
+        container.innerHTML = `
+            <div class="card">
+                <span class="date-badge">📅 ${item.date}</span>
+                <h2 style="margin:0; font-size:24px; color:var(--text); letter-spacing:-0.5px;">${item.city}</h2>
+                
+                ${item.flight ? `<div style="margin-top:10px; font-size:13px; color:var(--accent2); font-weight:700; background:rgba(141,163,135,0.1); padding:4px 8px; border-radius:6px; display:inline-block;">✈️ ${item.flight}</div>` : ''}
+
+                <div class="schedule-box">
+                    <div style="font-size:11px; font-weight:700; color:var(--muted); margin-bottom:4px; text-transform:uppercase; letter-spacing:1px;">交通移動安排</div>
+                    <div class="schedule-time">🕒 ${item.schedule}</div>
+                    <div style="font-size:13px; margin-top:4px; font-weight:500;">${item.transport}</div>
+                    <a href="${item.booking}" target="_blank" class="link-btn">前往官網購票 ➔</a>
+                </div>
+
+                <div style="font-size:12px; font-weight:800; margin:24px 0 10px; color:var(--accent); text-transform:uppercase; letter-spacing:1px;">🏛️ 景點票務與營業資訊</div>
+                <div class="attractions-list">
+                    ${highlightsHtml}
+                </div>
+
+                <div class="note-text">
+                    <span class="note-tag">本日叮嚀</span>${item.note}
+                </div>
+            </div>
+        `;
+    }
+
+    function toggleTheme() {
+        const html = document.documentElement;
+        const current = html.getAttribute('data-theme');
+        html.setAttribute('data-theme', current === 'dark' ? 'light' : 'dark');
+    }
+
+    renderMenu();
+    renderContent();
+  </script>
+</body>
+</html>
