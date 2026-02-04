@@ -39,76 +39,118 @@
     body{ margin:0; font-family: var(--sans); color: var(--text); background: var(--bg0); line-height: 1.5; transition: 0.2s; overflow-x: hidden; }
     .wrap{ max-width: var(--max); margin: 0 auto; padding: 12px 12px 100px; }
 
+    /* Top bar */
     .topbar{ position: sticky; top: 0; z-index: 30; background: var(--bg0); border-bottom: 1px solid var(--stroke); padding-bottom: 4px; backdrop-filter: blur(10px); }
-    .header-content { max-width: var(--max); margin: 0 auto; padding: 10px 16px 2px; display:flex; justify-content:space-between; align-items:center; }
-    .hero h1 { margin:0; font-size: 18px; font-weight: 700; color: var(--accent); }
+    .header-content { max-width: var(--max); margin: 0 auto; padding: 12px 16px 4px; display:flex; justify-content:space-between; align-items:center; }
+    .hero h1 { margin:0; font-size: 20px; font-weight: 800; color: var(--accent); letter-spacing: -0.5px; }
 
-    .menu-container { width: 100%; overflow-x: auto; padding: 8px 12px; scrollbar-width: none; }
+    /* 天數選單 */
+    .menu-container { width: 100%; overflow-x: auto; padding: 8px 16px 12px; scrollbar-width: none; }
     .menu-container::-webkit-scrollbar { display: none; }
-    .menu { display: flex; gap: 8px; min-width: max-content; }
+    .menu { display: flex; gap: 10px; min-width: max-content; padding: 4px 0; }
+    
     .menu-item {
-        display: flex; flex-direction: column; align-items: center; justify-content: center;
-        min-width: 60px; height: 60px; border-radius: 12px; border: 1px solid var(--stroke);
-        background: var(--bg1); cursor: pointer; color: var(--muted); transition: all 0.2s;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.03);
+        display: flex; align-items: center; justify-content: center;
+        min-width: 85px; height: 42px; border-radius: 25px; border: 1px solid var(--stroke);
+        background: var(--bg1); cursor: pointer; color: var(--muted); 
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+        font-weight: 700; font-size: 14px;
+        letter-spacing: 0.2px;
     }
-    .menu-item.active { background: var(--accent); color: #fff; border-color: var(--accent); box-shadow: 0 4px 8px rgba(0,0,0,0.15); }
+    .menu-item:active { transform: scale(0.95); }
+    .menu-item.active { 
+        background: linear-gradient(135deg, var(--accent), #5a6885); 
+        color: #fff; border-color: transparent; 
+        box-shadow: 0 4px 12px rgba(108, 122, 156, 0.4); 
+    }
 
     .card{
-      background: var(--bg1); border: 1px solid var(--stroke); border-radius: 20px;
-      padding: 20px; margin-top: 12px; box-shadow: var(--shadow);
+      background: var(--bg1); border: 1px solid var(--stroke); border-radius: 28px;
+      padding: 24px; margin-top: 12px; box-shadow: var(--shadow);
+      animation: fadeIn 0.4s ease-out;
     }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
     .date-badge { font-size: 12px; color: var(--accent); font-weight: 700; margin-bottom: 4px; display: block; }
     
     .schedule-box {
-        background: var(--bg2);
-        border-left: 4px solid var(--soft-purple);
-        padding: 15px; margin: 15px 0; border-radius: 4px 12px 12px 4px;
+        background: var(--bg2); border-left: 4px solid var(--soft-purple);
+        padding: 15px; margin: 18px 0; border-radius: 4px 16px 16px 4px;
         border: 1px solid var(--stroke); border-left-width: 4px;
     }
     .schedule-time { color: var(--soft-purple); font-weight: 800; font-size: 1.1em; letter-spacing: 0.3px; display: block; margin-bottom: 4px; }
 
-    .attractions-list { display: grid; grid-template-columns: 1fr; gap: 12px; margin: 12px 0; }
+    .lodging-box {
+        background: rgba(108, 122, 156, 0.06); border: 1px dashed var(--accent);
+        border-radius: 18px; padding: 18px; margin: 18px 0;
+    }
+    .lodging-title { font-size: 12px; font-weight: 800; color: var(--accent); text-transform: uppercase; margin-bottom: 6px; display: flex; align-items: center; gap: 6px; }
+
+    .attractions-list { display: grid; grid-template-columns: 1fr; gap: 14px; margin: 16px 0; }
     .attr-item {
-        background: var(--bg1); padding: 16px; border-radius: 16px; border: 1px solid var(--stroke);
+        background: var(--bg1); padding: 18px; border-radius: 20px; border: 1px solid var(--stroke);
         display: flex; flex-direction: column; gap: 10px;
     }
     .attr-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 4px; }
-    .attr-name { font-weight: 700; font-size: 15px; color: var(--text); flex: 1; }
-    .attr-stay { font-size: 11px; color: var(--accent); background: var(--bg2); padding: 2px 8px; border-radius: 6px; font-weight: 600; border: 1px solid var(--stroke); white-space: nowrap; }
+    .attr-name { font-weight: 800; font-size: 16px; color: var(--text); flex: 1; }
+    .attr-stay { font-size: 11px; color: var(--accent); background: var(--bg2); padding: 3px 10px; border-radius: 8px; font-weight: 700; border: 1px solid var(--stroke); white-space: nowrap; }
     
-    .info-row { display: grid; grid-template-columns: 1fr; gap: 4px; font-size: 12px; color: var(--muted); }
+    .info-row { display: grid; grid-template-columns: 1fr; gap: 4px; font-size: 13px; color: var(--muted); }
     .info-pill { display: flex; align-items: center; gap: 6px; }
     .price { color: var(--price-tag); font-weight: 700; }
+
+    .attr-note {
+        font-size: 12px; color: var(--accent2); background: rgba(141, 163, 135, 0.08);
+        padding: 12px; border-radius: 12px; border-left: 4px solid var(--accent2);
+        margin-top: 6px; line-height: 1.6;
+    }
+
+    /* 步道視覺圖 */
+    .hiking-visual-map {
+        margin: 20px 0; background: var(--bg2); border: 1px solid var(--stroke); border-radius: 20px; padding: 24px;
+        text-align: center;
+    }
+    .hiking-line-container {
+        display: flex; flex-direction: column; align-items: center; gap: 16px; margin: 10px 0;
+    }
+    .stop-point { display: flex; align-items: center; gap: 12px; width: 100%; max-width: 320px; }
+    .stop-icon { width: 18px; height: 18px; border-radius: 50%; background: var(--accent); border: 4px solid var(--bg1); flex-shrink: 0; box-shadow: 0 0 0 2px var(--accent); }
+    .stop-info { text-align: left; }
+    .stop-name { font-weight: 800; font-size: 14px; }
+    .stop-elev { font-size: 11px; color: var(--muted2); }
+    .trail-connector { width: 3px; height: 25px; background: repeating-linear-gradient(to bottom, var(--accent), var(--accent) 4px, transparent 4px, transparent 8px); margin-left: 7px; align-self: flex-start; }
 
     .nav-link {
         display: flex; align-items: center; justify-content: center; gap: 8px;
         font-size: 13px; color: var(--text); text-decoration: none;
-        padding: 12px; border: 1px solid var(--stroke); border-radius: 12px;
-        background: var(--bg2); font-weight: 600; transition: 0.2s;
-        margin-top: 4px;
+        padding: 12px; border: 1px solid var(--stroke); border-radius: 14px;
+        background: var(--bg2); font-weight: 700; transition: 0.2s;
+        margin-top: 6px;
     }
     .nav-link:active { background: var(--accent); color: white; border-color: var(--accent); }
 
     .link-btn {
         display: flex; align-items: center; justify-content: center; gap: 8px;
-        padding: 12px; border-radius: 12px;
-        background: var(--accent); color: #fff; font-size: 14px; font-weight: 600;
-        text-decoration: none; margin-top: 8px;
+        padding: 12px; border-radius: 14px;
+        background: var(--accent); color: #fff; font-size: 14px; font-weight: 700;
+        text-decoration: none; margin-top: 10px;
     }
 
-    .btn { cursor: pointer; border: 1px solid var(--stroke); background: var(--bg1); color: var(--text); padding: 6px 12px; border-radius: 8px; font-size: 12px; font-weight: 600; }
+    .btn { cursor: pointer; border: 1px solid var(--stroke); background: var(--bg1); color: var(--text); padding: 8px 14px; border-radius: 10px; font-size: 12px; font-weight: 700; }
     
-    .note-text { font-size: 13px; color: var(--muted); border-top: 1px dashed var(--stroke); padding-top: 12px; margin-top: 20px; line-height: 1.6; }
-    .note-tag { background: var(--accent2); color: white; padding: 1px 6px; border-radius: 4px; font-size: 10px; margin-right: 4px; vertical-align: middle; }
+    .note-text { font-size: 13px; color: var(--muted); border-top: 1px dashed var(--stroke); padding-top: 15px; margin-top: 25px; line-height: 1.7; }
+    .note-tag { background: var(--accent2); color: white; padding: 2px 8px; border-radius: 6px; font-size: 11px; margin-right: 6px; vertical-align: middle; }
   </style>
 </head>
 <body>
 
   <div class="topbar">
     <div class="header-content">
-      <div class="hero"><h1>2026.6 Italy</h1></div>
-      <button onclick="toggleTheme()" class="btn">🌓 主題</button>
+      <div class="hero">
+        <h1>2026.6 Italy</h1>
+        <button onclick="toggleTheme()" class="btn">🌓 主題</button>
+      </div>
     </div>
     <div class="menu-container"><div class="menu" id="dayMenu"></div></div>
   </div>
@@ -121,169 +163,229 @@
         day: 1, date: "2026/06/13 (六)",
         city: "米蘭 (Milan)",
         flight: "BR 95 (EVA) | 07:35 抵達 MXP",
+        lodging: {
+            name: "米蘭 Airbnb (Via Vitruvio, 44)",
+            addr: "Via Vitruvio, 44, 20124 Milano, Italy",
+            link: "https://www.google.com/maps/search/?api=1&query=Via+Vitruvio+44+Milano"
+        },
         transport: "機場快線 Malpensa Express",
         schedule: "09:13 MXP T1 ➜ 10:07 Milano Centrale",
         booking: "https://www.malpensaexpress.it/en/",
         highlights: [
-            {n: "米蘭大教堂 Duomo di Milano", s: "2.5-3小時", p: "€7-20 (視登頂方式)", t: "09:00-19:00", r: "建議預約"},
+            {n: "米蘭大教堂 Duomo di Milano", s: "2.5-3小時", p: "€7-20", t: "09:00-19:00", r: "建議預約"},
             {n: "艾曼紐二世拱廊 Galleria Vittorio Emanuele II", s: "1小時", p: "免費", t: "24小時", r: "無需預約"},
             {n: "星巴克臻選烘焙工坊 Starbucks Reserve Roastery", s: "1小時", p: "免費參觀", t: "07:30-22:00", r: "無需預約", customLink: "https://maps.app.goo.gl/LoonkhWiVqUVob2KA"}
         ],
-        note: "抵達後先將行李寄存在飯店。第一天以大教堂周邊為主，調整時差。"
+        note: "抵達中央車站後，從主要出口步行 2 分鐘即可抵達住宿地點。建議先放行李再開始行程。"
       },
       {
         day: 2, date: "2026/06/14 (日)",
-        city: "威尼斯主島 (Venice Main Island)",
-        transport: "Trenitalia / Italo 高鐵 + 區域火車",
-        schedule: "08:45 Milano ➜ 10:57 Mestre | 飯店置物 | 12:10 Mestre ➜ S. Lucia",
-        booking: "https://www.trenitalia.com/en.html",
+        city: "威尼斯 (Venice Mestre)",
+        lodging: {
+            name: "威尼斯 Airbnb (Viale Venezia, 9)",
+            addr: "Viale Venezia, 9, 30171 Venezia, Italy",
+            link: "https://www.google.com/maps/search/?api=1&query=Viale+Venezia+9+Mestre"
+        },
+        transport: "Italo 8977 EVO 高鐵",
+        schedule: "09:35 Milano ➜ 11:52 Venezia Mestre",
+        booking: "https://www.italotreno.it/en",
         highlights: [
             {n: "赤足橋 Ponte degli Scalzi", s: "20分鐘", p: "免費", t: "24小時", r: "拍大運河絕佳位"},
             {n: "沈船書店 Libreria Acqua Alta", s: "45分鐘", p: "免費", t: "09:00-19:00", r: "網美必拍書牆"},
             {n: "里阿爾托橋 Ponte di Rialto", s: "45分鐘", p: "免費", t: "24小時", r: "威尼斯石橋經典"},
             {n: "聖馬可大教堂 & 廣場 Basilica di San Marco", s: "1.5小時", p: "廣場免費/教堂€6", t: "09:30-17:15", r: "需預約"},
-            {n: "嘆息橋 Ponte dei Sospiri", s: "15分鐘", p: "外部拍照免費", t: "24小時", r: "麥桿橋拍攝最順"}
+            {n: "嘆息橋 Ponte dei Sospiri", s: "15分鐘", p: "免費", t: "24小時", r: "經典拍照點"}
         ],
-        note: "在 Mestre 放行李預留一小時，再搭火車前往主島（約10分鐘車程）。"
+        note: "火車班次：**Italo 8977 EVO**。中途停靠：Brescia | Desenzano | Verona Porta Nuova | Vicenza | Padua。住宿位於 Mestre 車站旁。注意公寓位於三樓且沒有電梯。"
       },
       {
         day: 3, date: "2026/06/15 (一)",
         city: "威尼斯外島 (Venice Islands)",
+        lodging: {
+            name: "威尼斯 Airbnb (Viale Venezia, 9)",
+            addr: "Viale Venezia, 9, 30171 Venezia, Italy",
+            link: "https://www.google.com/maps/search/?api=1&query=Viale+Venezia+9+Mestre"
+        },
         transport: "Trenitalia + ACTV 水上巴士",
-        schedule: "08:50 Venezia Mestre ➜ 09:02 Venezia S. Lucia (轉乘 Line 12)",
+        schedule: "08:50 Venezia Mestre ➜ 09:02 Venezia S. Lucia (轉 Line 12)",
         booking: "https://actv.avmspa.it/en",
         highlights: [
-            {n: "布拉諾島 (彩色島) Burano", s: "3-4小時", p: "免費", t: "24小時", r: "彩色建築與蕾絲"},
+            {n: "布拉諾島 (彩色島) Burano", s: "3-4小時", p: "免費", t: "24小時", r: "彩色建築"},
             {n: "總督宮 Palazzo Ducale", s: "2小時", p: "€30", t: "09:00-19:00", r: "建議預約"},
             {n: "學院橋 Ponte dell'Accademia", s: "30分鐘", p: "免費", t: "24小時", r: "拍安康聖母院角度"}
         ],
-        note: "早上先衝彩色島，下午回主島參觀總督宮。"
+        note: "早上先從 Mestre 搭火車去本島碼頭轉船前往彩色島。"
       },
       {
         day: 4, date: "2026/06/16 (二)",
-        city: "多洛米蒂 (Dolomites Day 1)",
-        transport: "火車 + SAD 巴士",
-        schedule: "08:50 Venezia Mestre ➜ 11:24 Bolzano | 11:42 Bus 350 ➜ Ortisei",
-        booking: "https://www.sii.bz.it/en",
+        city: "東多洛米蒂自駕 (湖泊之旅)",
+        lodging: {
+            name: "Cortina Airbnb (Via Roma)",
+            addr: "Via Roma, Cortina d'Ampezzo, Veneto 32043, Italy",
+            link: "https://www.google.com/maps/search/?api=1&query=Via+Roma+Cortina+d%27Ampezzo"
+        },
+        transport: "租車自駕 (Mestre 取車)",
+        schedule: "09:00 Mestre 取車 ➜ 11:00 Cortina 置物 ➜ 湖泊巡禮",
         highlights: [
-            {n: "Ortisei 小鎮 (St. Ulrich)", s: "2小時", p: "免費", t: "—", r: "山區基地點"},
-            {n: "休斯山 Alpe di Siusi (纜車)", s: "3小時", p: "約€28", t: "08:30-18:00", r: "歐洲最大高山草甸"}
+            {n: "奧龍佐湖 Lago di Auronzo", s: "40分鐘", p: "免費停車", t: "24小時", r: " Tiffany 藍水色", note: "Tiffany 藍水色、大型停車場優勢。進入山區理想的第一站。"},
+            {n: "米蘇里納湖 Lago di Misurina", s: "1小時", p: "收費停車", t: "24小時", r: "多洛米蒂之珠", note: "著名療養院倒影。注意收費藍線格。"},
+            {n: "杜倫湖 Dürrensee", s: "30分鐘", p: "免費停車", t: "24小時", r: "三尖峰展望點", note: "湖對面有木製展望台，可遠眺三尖峰北壁。"},
+            {n: "多比亞科湖 Lago di Dobbiaco", s: "1小時", p: "收費停車", t: "24小時", r: "中繼休息站", note: "水深淺清澈，適合休息。"},
+            {n: "布萊埃斯湖 Lago di Braies", s: "2-3小時", p: "停車約€10+", t: "24小時", r: "須提前預約", note: "旺季 (7-9月) 9:30-16:00 交通管制，需預約 P1/P2/P4 或接駁。"}
         ],
-        note: "入住飯店後領取 Mobilcard。下午纜車上休斯山賞草原景觀。"
+        note: "自駕路線環線規劃。建議將 Braies 放在下午 4 點後進入，光線佳且免管制。"
       },
       {
         day: 5, date: "2026/06/17 (三)",
-        city: "多洛米蒂 (Dolomites Day 2)",
-        transport: "纜車 (Seceda)",
-        schedule: "08:30 纜車站開門即出發 (Ortisei 站)",
-        booking: "https://www.seceda.it/en/",
+        city: "三尖峰健行 (Tre Cime 101 步道)",
+        lodging: {
+            name: "Cortina Airbnb (Via Roma)",
+            addr: "Via Roma, Cortina d'Ampezzo, Veneto 32043, Italy",
+            link: "https://www.google.com/maps/search/?api=1&query=Via+Roma+Cortina+d%27Ampezzo"
+        },
+        transport: "自駕 (前往登山口停車場)",
+        schedule: "08:00 Cortina 出發 ➜ 08:45 抵達 Rifugio Auronzo",
         highlights: [
-            {n: "Seceda 刀鋒山纜車", s: "4-5小時", p: "約€39.5", t: "08:30-17:30", r: "震撼人心刀鋒岩"},
-            {n: "Pieralongia 步道", s: "1.5小時", p: "免費", t: "—", r: "與巨石拍照"}
+            {n: "三尖峰 101 號步道健行", s: "5-6小時", p: "過路費約€30", t: "—", r: "親子/長者推薦路線", note: "步道坡度較平緩，多以緩坡為主，走起來相對輕鬆。"}
         ],
-        note: "早起上山可避開午後雲霧，視覺效果最佳。"
+        showHikingVisual: true,
+        note: "自駕上山過路費約 €30。務必在早上 8 點前抵達，否則停車場一滿，只能在下方的 Misurina 轉接駁車。"
       },
       {
         day: 6, date: "2026/06/18 (四)",
-        city: "多洛米蒂 (Dolomites Day 3)",
-        transport: "SAD Bus 巴士 (轉乘)",
-        schedule: "08:40 出發前往 Misurina / Tre Cime 方向",
-        booking: "https://www.sii.bz.it/en",
+        city: "Ortisei (多洛米蒂移動日)",
+        lodging: {
+            name: "Residence Cësa Sassela",
+            addr: "Via Sobosch 12, 39046 Ortisei in Val Gardena (BZ), Italy",
+            link: "https://maps.app.goo.gl/3idXQxqu9Lm5DM1o7"
+        },
+        transport: "自駕 (跨越山隘之旅)",
+        schedule: "09:00 Cortina 出發 ➜ 經 Passo Gardena ➜ Ortisei",
         highlights: [
-            {n: "三尖峰 Tre Cime di Lavaredo", s: "5-6小時", p: "免門票", t: "—", r: "健行核心行程"},
-            {n: "密蘇里納湖 Lago di Misurina", s: "1小時", p: "免費", t: "24小時", r: "多洛米蒂之珠"}
+            {n: "St. Ulrich (Ortisei) 小鎮漫步", s: "3-4小時", p: "免費", t: "—", r: "傳統木雕與氛圍"},
+            {n: "富內斯谷 Val di Funes (Santa Maddalena)", s: "2小時", p: "免費", t: "—", r: "明信片教堂夕陽"}
         ],
-        note: "這天體力消耗最大，建議備妥健行鞋與充足飲水。"
+        note: "自駕路段風景極佳。入住後可開車前往約 30 分鐘車程的 Val di Funes 拍照。"
       },
       {
         day: 7, date: "2026/06/19 (五)",
-        city: "多洛米蒂 (Dolomites Day 4)",
-        transport: "巴士 / 自駕推薦",
-        schedule: "09:00 前往布萊埃斯湖 (Lago di Braies)",
-        booking: "https://www.prags.bz/en",
+        city: "多洛米蒂 (纜車挑戰日)",
+        lodging: {
+            name: "Residence Cësa Sassela",
+            addr: "Via Sobosch 12, 39046 Ortisei in Val Gardena (BZ), Italy",
+            link: "https://maps.app.goo.gl/3idXQxqu9Lm5DM1o7"
+        },
+        transport: "Dolomiti Supersummer Card 1日票",
+        schedule: "08:30 Seceda ➜ 12:30 Alpe di Siusi ➜ 15:30 Resciesa",
         highlights: [
-            {n: "布萊埃斯湖 Lago di Braies", s: "3小時", p: "預約巴士/停車位", t: "24小時", r: "最美高山湖泊"},
-            {n: "富內斯谷 Val di Funes (Santa Maddalena)", s: "2小時", p: "免費", t: "—", r: "明信片教堂景點"}
+            {n: "刀鋒山 Seceda (纜車)", s: "3.5小時", p: "使用一日票", t: "08:30-17:30", r: "晨光最震撼"},
+            {n: "休斯高原 Alpe di Siusi (纜車)", s: "3小時", p: "使用一日票", t: "08:30-18:00", r: "高原漫步"},
+            {n: "Resciesa (鐵軌纜車)", s: "1.5小時", p: "使用一日票", t: "08:30-18:00", r: "夕陽風景"}
         ],
-        note: "Lago di Braies 在夏季有限制進入，建議提前預約交通或停車位。Val di Funes 適合傍晚拍攝。"
+        note: "使用 Supersummer Card (約 €62)。今日車子可停飯店，全日纜車代步。"
       },
       {
         day: 8, date: "2026/06/20 (六)",
         city: "佛羅倫斯 (Florence Day 1)",
-        transport: "高鐵 Frecciarossa",
-        schedule: "09:16 Bolzano ➜ 12:35 Firenze S.M.N (FR 9411)",
-        booking: "https://www.trenitalia.com/en.html",
+        lodging: {
+            name: "佛羅倫斯 Airbnb (Via Luigi Alamanni, 35)",
+            addr: "Via Luigi Alamanni, 35, 50123 Firenze, Italy",
+            link: "https://www.google.com/maps/search/?api=1&query=Via+Luigi+Alamanni+35+Firenze"
+        },
+        transport: "Italo 8915 EVO 高鐵",
+        schedule: "09:00 Ortisei 取車 ➜ 12:00 Mestre 還車 | 14:17 Italo 8915 ➜ 16:20 佛羅倫斯",
+        booking: "https://www.italotreno.it/en",
         highlights: [
-            {n: "聖母百花大教堂 Cattedrale", s: "1.5小時", p: "教堂免費/圓頂需票", t: "10:15-15:45", r: "文藝復興巔峰"},
+            {n: "聖母百花大教堂 Cattedrale", s: "1.5小時", p: "教堂免費/圓頂需票", t: "10:15-15:45", r: "需預約"},
             {n: "佛羅倫斯中央市場 Mercato Centrale", s: "1.5小時", p: "免費進入", t: "08:00-00:00", r: "必吃牛肚包"}
         ],
-        note: "抵達後先去市場用餐，下午參觀大教堂周邊。圓頂登頂門票需極早預約。"
+        note: "今日結束自駕，返回 Mestre 還車。搭乘 **Italo 8915 EVO** 高鐵前往佛羅倫斯。中途停靠：Padua | Ferrara | Bologna Centrale。Airbnb 位於車站旁。請從 B 樓梯進入，搭電梯到三樓。走出電梯，右手邊第二扇門即是房間。"
       },
       {
         day: 9, date: "2026/06/21 (日)",
         city: "佛羅倫斯 (Florence Day 2)",
-        transport: "步行 (藝術深度巡禮)",
-        schedule: "08:45 烏菲茲美術館預約入場",
-        booking: "https://www.uffizi.it/en",
+        lodging: {
+            name: "佛羅倫斯 Airbnb (Via Luigi Alamanni, 35)",
+            addr: "Via Luigi Alamanni, 35, 50123 Firenze, Italy",
+            link: "https://www.google.com/maps/search/?api=1&query=Via+Luigi+Alamanni+35+Firenze"
+        },
+        transport: "步行",
         highlights: [
-            {n: "烏菲茲美術館 Galleria degli Uffizi", s: "4小時", p: "約€25", t: "08:15-18:30", r: "大師傑作集散地"},
-            {n: "維奇歐橋 (老橋) Ponte Vecchio", s: "30分鐘", p: "免費", t: "24小時", r: "跨越阿諾河之橋"},
-            {n: "碧緹宮 Palazzo Pitti", s: "2小時", p: "約€16-22", t: "08:15-18:30", r: "麥地奇家族宮殿"},
-            {n: "波波里花園 Boboli Gardens", s: "1.5小時", p: "約€10", t: "08:15-18:30", r: "義大利式庭園典範"},
-            {n: "米開朗基羅廣場 Piazzale Michelangelo", s: "1.5小時", p: "免費", t: "24小時", r: "俯瞰全景看夕陽"}
+            {n: "烏菲茲美術館 Galleria degli Uffizi", s: "4小時", p: "約€25", t: "08:15-18:30", r: "需預約傑作展"},
+            {n: "維奇歐橋 (老橋) Ponte Vecchio", s: "30分鐘", p: "免費", t: "24小時", r: "跨河經典"},
+            {n: "碧緹宮 Palazzo Pitti", s: "2小時", p: "約€16-22", t: "08:15-18:30", r: "宮殿參觀"},
+            {n: "波波里花園 Boboli Gardens", s: "1.5小時", p: "約€10", t: "08:15-18:30", r: "義大利式庭園"},
+            {n: "米開朗基羅廣場 Piazzale Michelangelo", s: "1.5小時", p: "免費", t: "24小時", r: "全景夕陽"}
         ],
-        note: "今日行程較重，下午看完美術館後，穿過老橋即可抵達碧緹宮與花園。最後再前往廣場看夕陽。"
+        note: "看完美術館穿過老橋即達碧緹宮。傍晚去米開朗基羅廣場看夕陽。"
       },
       {
         day: 10, date: "2026/06/22 (一)",
         city: "佛羅倫斯 ➜ 比薩 (Pisa Day Trip)",
+        lodging: {
+            name: "佛羅倫斯 Airbnb (Via Luigi Alamanni, 35)",
+            addr: "Via Luigi Alamanni, 35, 50123 Firenze, Italy",
+            link: "https://www.google.com/maps/search/?api=1&query=Via+Luigi+Alamanni+35+Firenze"
+        },
         transport: "區域火車 (Regionale)",
         schedule: "09:00 學院美術館 | 14:00 Firenze ➜ 15:00 Pisa",
-        booking: "https://www.trenitalia.com/en.html",
         highlights: [
             {n: "學院美術館 Galleria dell'Accademia", s: "2小時", p: "約€16", t: "08:15-18:50", r: "看大衛真跡"},
-            {n: "比薩斜塔 Leaning Tower of Pisa", s: "1.5小時", p: "外觀免費/登塔€20", t: "09:00-20:00", r: "世界奇觀拍照"},
-            {n: "奇蹟廣場 Piazza dei Miracoli", s: "1小時", p: "免費", t: "24小時", r: "洗禮堂與大教堂外圍"}
+            {n: "比薩斜塔 Leaning Tower of Pisa", s: "1.5小時", p: "外觀免費/登塔€20", t: "09:00-20:00", r: "世界奇觀"},
+            {n: "新聖母大殿藥妝店 Santa Maria Novella", s: "1小時", p: "免費參觀", t: "09:30-20:00", r: "世界最老藥妝", customLink: "https://maps.app.goo.gl/UWH5EZejUwBpNFzT6?g_st=ic"}
         ],
-        note: "上午在佛羅倫斯看大衛像，下午搭區域火車前往比薩快閃斜塔，當晚返回佛羅倫斯。不用搬運行李。"
+        note: "下午快閃比薩。住處就在火車站出口旁。"
       },
       {
         day: 11, date: "2026/06/23 (二)",
         city: "羅馬 (Rome Day 1)",
-        transport: "高鐵 Frecciarossa / Italo (直達)",
-        schedule: "08:48 Firenze S.M.N ➜ 10:25 Roma Termini",
-        booking: "https://www.trenitalia.com/en.html",
+        lodging: {
+            name: "羅馬 Airbnb (Via Merulana, 272)",
+            addr: "Via Merulana, 272, 00184 Roma, Italy",
+            link: "https://www.google.com/maps/search/?api=1&query=Via+Merulana+272+Roma"
+        },
+        transport: "Italo 8951 高鐵 (已購票)",
+        schedule: "09:03 Firenze S.M.N ➜ 10:40 Roma Termini",
+        booking: "https://www.italotreno.it/en",
         highlights: [
-            {n: "特雷維噴泉 (許願池) Fontana di Trevi", s: "45分鐘", p: "免費", t: "24小時", r: "羅馬最美噴泉"},
-            {n: "萬神殿 Pantheon", s: "1小時", p: "€5", t: "09:00-19:00", r: "完美穹頂建築"},
-            {n: "納沃納廣場 Piazza Navona", s: "1小時", p: "免費", t: "24小時", r: "巴洛克雕刻之之美"}
+            {n: "特雷維噴泉 (許願池) Fontana di Trevi", s: "45分鐘", p: "免費", t: "24小時", r: "羅馬地標"},
+            {n: "萬神殿 Pantheon", s: "1小時", p: "€5", t: "09:00-19:00", r: "必看建築"},
+            {n: "納沃納廣場 Piazza Navona", s: "1小時", p: "免費", t: "24小時", r: "巴洛克之美"}
         ],
-        note: "今日搭乘高鐵直達羅馬，不再中停比薩。下午有更多時間悠閒逛市中心。抵達後先至飯店放行李。"
+        note: "火車班次：**Italo 8951**。座位資訊：**4 人、車廂 4、座位 1, 2, 3, 4**。抵達 Termini 後，搭地鐵 A 線到 Vittorio Emanuele 站，步行約 700 公尺即達住宿。"
       },
       {
         day: 12, date: "2026/06/24 (三)",
         city: "羅馬 (Rome Day 2)",
-        transport: "地鐵 / 步行 (古羅馬時光機)",
+        lodging: {
+            name: "羅馬 Airbnb (Via Merulana, 272)",
+            addr: "Via Merulana, 272, 00184 Roma, Italy",
+            link: "https://www.google.com/maps/search/?api=1&query=Via+Merulana+272+Roma"
+        },
+        transport: "地鐵 / 步行",
         schedule: "08:30 羅馬競技場預約入場",
-        booking: "https://www.coopculture.it/en/",
         highlights: [
-            {n: "羅馬競技場 Colosseum", s: "3小時", p: "€18 (套票)", t: "09:00-19:15", r: "必看歷史地標"},
-            {n: "古羅馬廣場 & 帕拉提諾之丘", s: "2小時", p: "含在套票內", t: "09:00-19:15", r: "歷史遺跡群"},
-            {n: "威尼斯廣場 Piazza Venezia", s: "45分鐘", p: "免費", t: "24小時", r: "壯觀的祖國祭壇"}
+            {n: "羅馬競技場 Colosseum", s: "3小時", p: "€18 (套票)", t: "09:00-19:15", r: "需預約"},
+            {n: "古羅馬廣場 & 帕拉提諾之丘", s: "2小時", p: "含套票內", t: "09:00-19:15", r: "歷史遺跡"},
+            {n: "威尼斯廣場 Piazza Venezia", s: "45分鐘", p: "免費", t: "24小時", r: "壯觀祭壇"}
         ],
-        note: "羅馬安檢耗時，競技場務必準時抵達指定入口。建議穿著好走的鞋。"
+        note: "競技場安檢耗時。建議穿著好走的鞋。今日行程多可步行串聯。"
       },
       {
         day: 13, date: "2026/06/25 (四)",
         city: "米蘭 (Milan Last Night)",
-        transport: "高鐵 Frecciarossa / Italo",
+        lodging: {
+            name: "米蘭 Airbnb (Via Vitruvio, 44)",
+            addr: "Via Vitruvio, 44, 20124 Milano, Italy",
+            link: "https://www.google.com/maps/search/?api=1&query=Via+Vitruvio+44+Milano"
+        },
+        transport: "高鐵 (回程)",
         schedule: "15:10 Roma Termini ➜ 18:05 Milano Centrale",
-        booking: "https://www.trenitalia.com/en.html",
         highlights: [
             {n: "梵蒂岡博物館 Musei Vaticani", s: "4小時", p: "€20", t: "08:00-19:00", r: "強烈建議預約"},
-            {n: "聖彼得大教堂 St. Peter's Basilica", s: "1.5小時", p: "教堂免費", t: "07:00-19:00", r: "天主教核心中心"}
+            {n: "聖彼得大教堂 St. Peter's Basilica", s: "1.5小時", p: "教堂免費", t: "07:00-19:00", r: "天主教核心"}
         ],
-        note: "上午參觀梵蒂岡，下午搭三點的高鐵回米蘭。最後一晚入住中央車站附近，明天準備回程。"
+        note: "上午遊覽梵蒂岡，下午高鐵回米蘭入住。準備明日搭機。"
       }
     ];
 
@@ -293,8 +395,7 @@
         const menu = document.getElementById('dayMenu');
         menu.innerHTML = itinerary.map(item => `
             <div class="menu-item ${item.day === currentDay ? 'active' : ''}" onclick="setDay(${item.day})">
-                <div style="font-size:10px; font-weight:700; opacity:0.8;">DAY</div>
-                <div style="font-weight:800;font-size:18px">${item.day}</div>
+                Day ${item.day}
             </div>
         `).join('');
     }
@@ -313,6 +414,18 @@
         const item = itinerary.find(i => i.day === currentDay);
         const container = document.getElementById('content');
         
+        let lodgingHtml = '';
+        if (item.lodging) {
+            lodgingHtml = `
+                <div class="lodging-box">
+                    <div class="lodging-title">🏠 住宿地點</div>
+                    <div style="font-size:14px; font-weight:800; color:var(--text);">${item.lodging.name}</div>
+                    <div style="font-size:12px; color:var(--muted); margin-bottom:12px;">${item.lodging.addr}</div>
+                    <a href="${item.lodging.link}" target="_blank" class="nav-link">📍 在地圖開啟住宿導航</a>
+                </div>
+            `;
+        }
+
         const highlightsHtml = item.highlights.map(h => {
             const mapUrl = h.customLink || `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(h.n + " Italy")}`;
             return `
@@ -322,33 +435,72 @@
                         <span class="attr-stay">⏳ ${h.s}</span>
                     </div>
                     <div class="info-row">
-                        <div class="info-pill">🏷️ 成人門票: <span class="price">${h.p}</span></div>
+                        <div class="info-pill">🏷️ 門票: <span class="price">${h.p}</span></div>
                         <div class="info-pill">⏰ 營業: <span>${h.t}</span></div>
                         <div class="info-pill">📅 狀態: <span>${h.r}</span></div>
                     </div>
+                    ${h.note ? `<div class="attr-note">💡 景點筆記：${h.note}</div>` : ''}
                     <a href="${mapUrl}" target="_blank" class="nav-link">📍 在地圖開啟導航</a>
                 </div>
             `;
         }).join('');
 
+        let visualMapHtml = '';
+        if (item.showHikingVisual) {
+            visualMapHtml = `
+                <div style="font-size:12px; font-weight:800; margin:24px 0 10px; color:var(--accent); text-transform:uppercase; letter-spacing:1px;">🗺️ 三尖峰 101 步道路線指引 (輕鬆緩坡)</div>
+                <div class="hiking-visual-map">
+                    <div class="hiking-line-container">
+                        <div class="stop-point">
+                            <div class="stop-icon" style="background: var(--accent2);"></div>
+                            <div class="stop-info">
+                                <div class="stop-name">Rifugio Auronzo (起點)</div>
+                                <div class="stop-elev">2,320m | 停車場 & 登山口</div>
+                            </div>
+                        </div>
+                        <div class="trail-connector"></div>
+                        <div class="stop-point">
+                            <div class="stop-icon"></div>
+                            <div class="stop-info">
+                                <div class="stop-name">Rifugio Lavaredo</div>
+                                <div class="stop-elev">2,344m | 平緩寬敞碎石路</div>
+                            </div>
+                        </div>
+                        <div class="trail-connector"></div>
+                        <div class="stop-point">
+                            <div class="stop-icon" style="background: var(--price-tag);"></div>
+                            <div class="stop-info">
+                                <div class="stop-name">Rifugio Locatelli (終點)</div>
+                                <div class="stop-elev">2,405m | 三尖峰正面絕佳拍攝點</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="margin-top:15px; font-size:11px; color:var(--muted2);">*此路線多為 101 寬平緩坡，往返約 3-4 小時 (不含拍照休息)。</div>
+                </div>
+            `;
+        }
+
         container.innerHTML = `
             <div class="card">
                 <span class="date-badge">📅 ${item.date}</span>
-                <h2 style="margin:0; font-size:24px; color:var(--text); letter-spacing:-0.5px;">${item.city}</h2>
+                <h2 style="margin:0; font-size:26px; color:var(--text); letter-spacing:-0.5px; font-weight:800;">${item.city}</h2>
                 
-                ${item.flight ? `<div style="margin-top:10px; font-size:13px; color:var(--accent2); font-weight:700; background:rgba(141,163,135,0.1); padding:4px 8px; border-radius:6px; display:inline-block;">✈️ ${item.flight}</div>` : ''}
+                ${item.flight ? `<div style="margin-top:10px; font-size:13px; color:var(--accent2); font-weight:700; background:rgba(141,163,135,0.1); padding:4px 8px; border-radius:8px; display:inline-block;">✈️ ${item.flight}</div>` : ''}
+
+                ${lodgingHtml}
 
                 <div class="schedule-box">
-                    <div style="font-size:11px; font-weight:700; color:var(--muted); margin-bottom:4px; text-transform:uppercase; letter-spacing:1px;">交通移動安排</div>
+                    <div style="font-size:11px; font-weight:800; color:var(--muted); margin-bottom:4px; text-transform:uppercase; letter-spacing:1px;">交通移動安排</div>
                     <div class="schedule-time">🕒 ${item.schedule}</div>
-                    <div style="font-size:13px; margin-top:4px; font-weight:500;">方式：${item.transport}</div>
-                    <a href="${item.booking}" target="_blank" class="link-btn">前往官網購票 ➔</a>
+                    <div style="font-size:13px; margin-top:4px; font-weight:600;">方式：${item.transport}</div>
                 </div>
 
-                <div style="font-size:12px; font-weight:800; margin:24px 0 10px; color:var(--accent); text-transform:uppercase; letter-spacing:1px;">🏛️ 景點票務與營業資訊</div>
+                <div style="font-size:12px; font-weight:800; margin:28px 0 12px; color:var(--accent); text-transform:uppercase; letter-spacing:1px;">🏛️ 景點票務與營業資訊</div>
                 <div class="attractions-list">
                     ${highlightsHtml}
                 </div>
+
+                ${visualMapHtml}
 
                 <div class="note-text">
                     <span class="note-tag">本日叮嚀</span>${item.note}
